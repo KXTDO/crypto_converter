@@ -18,7 +18,6 @@
 
 <script>
 import Bag from "../components/Bag.vue";
-// import Pie from "../components/Pie.vue";
 export default {
   components: { Bag },
   name: "Wallet",

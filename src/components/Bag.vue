@@ -1,11 +1,7 @@
 <template>
   <div class="container">
     <div class="pie-container">
-      <pie-chart
-        class="pie-chart"
-        :chart-data="chartData"
-        :options="chartOptions"
-      ></pie-chart>
+      <pie-chart class="pie-chart" :data="pieData"></pie-chart>
     </div>
     <div class="data-container">
       <hr />
@@ -73,27 +69,7 @@ export default {
       secondRowPrice: "",
       secondRate: "",
       pieData: [1, 1],
-      chartOptions: {
-        hoverBorderWidth: 20,
-      },
-      chartData: {
-        hoverBackgroundColor: "red",
-        hoverBorderWidth: 10,
-        labels: ["bitcoin", "ethereum"],
-        datasets: [
-          {
-            label: "Your Crypto Bag",
-            backgroundColor: ["#41B883", "#E46651"],
-            data: [1, 1],
-          },
-        ],
-      },
     };
-  },
-  watch: {
-    chartData() {
-      this.$data._chart.update();
-    },
   },
   methods: {
     fetchFirstResults() {
@@ -108,7 +84,6 @@ export default {
             2
           );
         });
-      console.log(this.$data.chartData.datasets[0].data[0]);
     },
     fetchSecondResults() {
       fetch(
@@ -127,29 +102,26 @@ export default {
     inputFirstCurrency() {
       this.firstRowAmount = +this.firstRowAmount + +this.firstInput;
       this.firstInput = "";
-      this.$data.chartData.datasets[0].data[0] = +this.firstRowAmount;
+      this.pieData[0] = +this.firstRowAmount;
       this.fetchFirstResults();
     },
     outputFirstCurrency() {
       this.firstRowAmount -= this.firstInput;
       this.firstInput = "";
+      this.pieData[0] = +this.firstRowAmount;
       this.fetchFirstResults();
     },
     inputSecondCurrency() {
       this.secondRowAmount = +this.secondRowAmount + +this.secondInput;
       this.secondInput = "";
-      // this.chartData.datasets.data[1] = this.secondRowAmount;
+      this.pieData[1] = +this.secondRowAmount;
       this.fetchSecondResults();
     },
     outputSecondCurrency() {
       this.secondRowAmount -= this.secondInput;
       this.secondInput = "";
+      this.pieData[1] = +this.secondRowAmount;
       this.fetchSecondResults();
-    },
-    changeArray(oldArray, [itemId, newTitle]) {
-      let newArray = JSON.parse(JSON.stringify(oldArray));
-      (newArray.find(({ id }) => id === itemId) || {}).title = newTitle;
-      return newArray;
     },
   },
   mounted() {

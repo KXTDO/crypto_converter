@@ -13,6 +13,6 @@ export default {
 <style>
 body {
   background-image: url("./assets/ep_naturalblack.png");
-  overflow-x: hidden;
+  overflow: hidden;
 }
 </style>

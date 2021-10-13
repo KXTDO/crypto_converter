@@ -39,7 +39,7 @@
       </h2>
     </div>
     <div class="container-four">
-      <h4 id="lastlyUpdated">Lastly Updated: {{ timestamp }}</h4>
+      <h4 id="lastlyUpdated">Последнее обновление: {{ timestamp }}</h4>
     </div>
   </div>
 </template>
@@ -76,6 +76,9 @@ export default {
           this.timestamp = data[0].last_updated;
           this.amountTwo = this.amountOne * this.rate;
           console.log(data);
+          // if (this.currency_one == "usd-coin") {
+          //   this.currency_one = "usd";
+          // }
         });
     },
 
@@ -122,9 +125,8 @@ input {
 .container-there {
   background-color: rgba(46, 229, 157, 0.4);
   border-radius: 50px;
-  padding: 5%;
-  margin-top: 5%;
-  margin-bottom: 20%;
+  padding: 3%;
+  margin-bottom: 2%;
 }
 h2 {
   display: flex;
